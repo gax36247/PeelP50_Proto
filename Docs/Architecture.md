@@ -35,8 +35,6 @@ Główne komponenty:
 - PeelController_Lite – sterowanie pojazdem i fizyka jazdy
 - NSU_AutoDrive – tryb automatycznej jazdy (opcjonalny)
 - CameraFollow / CarCameraFollowNSU – kamera podążająca
-- NSU_WheelSpin – animacja kół
-- BrakeLightController – światła hamowania
 - SpeedometerAnalog / GearIndicatorUI – HUD pojazdu
 
 ### 2.4 Warstwa multimedialna
