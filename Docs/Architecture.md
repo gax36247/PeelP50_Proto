@@ -43,7 +43,6 @@ Odpowiada za dźwięk i treści multimedialne.
 Główne komponenty:
 - PeelEngineSound – dźwięk silnika
 - PeelSoundMenu – dźwięki interakcji
-- WenaWebView – osadzona treść webowa (jeśli aktywna)
 
 ## 3. Struktura scen Unity
 
