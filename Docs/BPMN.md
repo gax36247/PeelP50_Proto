@@ -1,4 +1,176 @@
-# BPMN – proces end-to-end (kiosk Peel P50)
+# BPMN – proces działania interaktywnego kiosku Peel P50
+
+## Opis
+
+Dokument przedstawia uproszczony proces BPMN (Business Process Model and Notation) opisujący działanie interaktywnego kiosku muzealnego Peel P50.
+
+Proces obejmuje:
+- przejście użytkownika do menu głównego,
+- wybór modułu,
+- uruchomienie wybranego trybu,
+- interakcję użytkownika,
+- automatyczny lub ręczny powrót do menu głównego.
+
+Proces ma charakter cykliczny i został zaprojektowany dla środowiska publicznego (muzeum / wystawa interaktywna).
+
+---
+
+# Uczestnicy procesu (Pool / Lanes)
+
+## Zwiedzający
+Osoba korzystająca z kiosku interaktywnego.
+
+## System
+Aplikacja uruchomiona na kiosku odpowiedzialna za:
+- wyświetlanie interfejsu,
+- uruchamianie modułów,
+- obsługę interakcji,
+- monitorowanie aktywności użytkownika.
+
+---
+
+# Przebieg procesu BPMN
+
+## 1. Zdarzenie początkowe
+
+Proces rozpoczyna się zdarzeniem startowym systemu.
+
+System przechodzi do menu głównego aplikacji.
+
+---
+
+## 2. Przejście do menu głównego
+
+System:
+- wyświetla menu główne,
+- oczekuje na wybór modułu przez użytkownika.
+
+---
+
+## 3. Wybranie modułu
+
+Zwiedzający wybiera jeden z dostępnych modułów systemu.
+
+---
+
+## 4. Bramka decyzyjna – „Jaki moduł został wybrany?”
+
+System analizuje wybór użytkownika i uruchamia odpowiedni moduł.
+
+Możliwe ścieżki procesu:
+
+- prezentacja pojazdu,
+- widok 360 wnętrza,
+- jazda testowa,
+- menu dźwięków pojazdów.
+
+---
+
+# Ścieżki procesu
+
+## 4.1 Prezentacja pojazdu
+
+### Zadanie systemowe
+System uruchamia prezentację pojazdu.
+
+### Aktywność użytkownika
+Zwiedzający wykonuje interakcję dotykową z prezentacją.
+
+---
+
+## 4.2 Widok 360 wnętrza
+
+### Zadanie systemowe
+System uruchamia widok 360 wnętrza pojazdu.
+
+### Aktywność użytkownika
+Zwiedzający eksploruje widok wnętrza pojazdu.
+
+---
+
+## 4.3 Jazda testowa
+
+### Zadanie systemowe
+System uruchamia tryb jazdy testowej.
+
+### Aktywność użytkownika
+Zwiedzający steruje pojazdem.
+
+---
+
+## 4.4 Menu dźwięków pojazdów
+
+### Zadanie systemowe
+System uruchamia menu dźwięków pojazdów.
+
+### Aktywność użytkownika
+Zwiedzający słucha dźwięków pojazdu.
+
+---
+
+# Zakończenie interakcji
+
+Każdy moduł może zostać zakończony na dwa sposoby.
+
+## Wariant 1 – użycie przycisku „Wstecz”
+
+Zwiedzający używa przycisku „Wstecz”.
+
+System:
+- kończy aktualny moduł,
+- wraca do menu głównego.
+
+---
+
+## Wariant 2 – brak aktywności
+
+System wykrywa brak aktywności użytkownika.
+
+System:
+- automatycznie kończy aktualny moduł,
+- przywraca menu główne,
+- przechodzi do stanu oczekiwania na kolejnego użytkownika.
+
+---
+
+# Charakterystyka procesu
+
+- Proces działa lokalnie na kiosku.
+- Proces nie wymaga backendu.
+- Proces może być wykonywany wielokrotnie.
+- System działa autonomicznie.
+- Proces został zaprojektowany dla środowiska muzealnego.
+
+---
+
+# Elementy BPMN wykorzystane w diagramie
+
+## Zdarzenia
+- Start Event
+- Timer Event („brak aktywności”)
+
+## Bramki
+- Exclusive Gateway (XOR)
+
+## Zadania
+- zadania systemowe,
+- aktywności użytkownika.
+
+## Przepływy
+- przepływ sekwencyjny pomiędzy modułami,
+- powrót do menu głównego.
+
+---
+
+# Podsumowanie
+
+Diagram BPMN przedstawia uproszczony proces obsługi interaktywnego kiosku muzealnego Peel P50.
+
+Proces umożliwia:
+- wybór modułu przez użytkownika,
+- uruchomienie interaktywnego doświadczenia,
+- obsługę aktywności użytkownika,
+- automatyczny reset systemu po zakończeniu interakcji.# BPMN – proces end-to-end (kiosk Peel P50)
 
 Dokument opisuje uproszczony proces end-to-end działania interaktywnej aplikacji muzealnej Peel P50, zgodnie z ideą BPMN (Business Process Model and Notation).
 
