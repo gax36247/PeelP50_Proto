@@ -1,112 +1,335 @@
-# Use Case + aktorzy — Peel P50 (kiosk muzealny)
+# Use Cases + aktorzy — PeelP50_Proto
 
-Dokument opisuje aktorów oraz przypadki użycia interaktywnej aplikacji Unity uruchamianej na kiosku multimedialnym w Muzeum Motoryzacji Wena. Aplikacja działa w trybie standalone, bez backendu.
+Dokument opisuje aktorów oraz przypadki użycia interaktywnej aplikacji Unity uruchamianej na kiosku multimedialnym w Muzeum Motoryzacji Wena w Oławie.
 
-## 1. Aktorzy
-
-1) Zwiedzający (Użytkownik kiosku)
-- osoba korzystająca z ekranu dotykowego kiosku
-- cel: obejrzeć pojazd, poznać informacje i uruchomić tryby interakcji (prezentacja, widok 360, jazda testowa)
-
-2) Administrator / Opiekun ekspozycji (pośredni)
-- nie korzysta z aplikacji jako użytkownik końcowy, ale odpowiada za uruchomienie kiosku i zapewnienie ciągłej pracy
-- cel: stabilne działanie aplikacji, minimalna potrzeba obsługi
-
-## 2. Założenia i ograniczenia (kontekst)
-
-- Aplikacja przeznaczona jest do pracy na kiosku dotykowym (autonomicznie, bez stałej obsługi).
-- Brak logowania, brak kont użytkowników.
-- Brak komunikacji z backendem / API.
-- Aplikacja powinna samoczynnie wracać do menu po bezczynności (ochrona przed “zawieszeniem się” na ekranie po odejściu zwiedzającego).
-
-## 3. Przypadki użycia (Use Cases)
-
-### UC-01: Rozpoczęcie interakcji z aplikacją (Tap to Start)
-Aktor: Zwiedzający  
-Cel: wejść z ekranu powitalnego do menu.  
-Warunek wstępny: aplikacja uruchomiona na kiosku, ekran powitalny widoczny.  
-Scenariusz główny:
-1. Zwiedzający dotyka ekran (“Dotknij, aby rozpocząć”).
-2. Aplikacja ukrywa ekran startowy i wyświetla menu główne.
-Rezultat: użytkownik widzi menu i może wybrać tryb.
+Aplikacja działa jako rozwiązanie typu standalone, bez backendu, bez kont użytkowników i bez wymaganego połączenia z Internetem. System został przygotowany do obsługi dotykowej oraz pracy w trybie kioskowym.
 
 ---
 
-### UC-02: Nawigacja po menu głównym
-Aktor: Zwiedzający  
-Cel: przejść do wybranego modułu (prezentacja/360/jazda/testy).  
-Warunek wstępny: menu główne jest widoczne.  
-Scenariusz główny:
-1. Zwiedzający wybiera opcję w menu (przycisk/pozycja).
-2. Aplikacja uruchamia odpowiednią scenę/moduł.
-Rezultat: uruchomiony zostaje wybrany tryb.
+# 1. Aktorzy
+
+## 1.1 Zwiedzający / użytkownik kiosku
+
+Osoba korzystająca z aplikacji na ekranie dotykowym kiosku muzealnego.
+
+### Cele użytkownika:
+- wybrać dostępny moduł aplikacji,
+- obejrzeć wnętrze pojazdu Peel P50 w trybie 360,
+- odsłuchać dźwięki pojazdu,
+- uruchomić jazdę testową,
+- sprawdzić wyniki przejazdu.
 
 ---
 
-### UC-03: Prezentacja modelu 3D pojazdu (oglądanie / obrót / detale)
-Aktor: Zwiedzający  
-Cel: obejrzeć pojazd Peel P50 w formie modelu 3D.  
-Warunek wstępny: uruchomiono moduł prezentacji.  
-Scenariusz główny:
-1. Zwiedzający obraca pojazd / kamerę gestami (lub UI).
-2. Zwiedzający ogląda detale pojazdu.
-3. Zwiedzający może wrócić do menu.
-Rezultat: użytkownik zapoznaje się z wizualnym modelem i wraca do wyboru trybów.
+## 1.2 Administrator / opiekun ekspozycji
+
+Osoba odpowiedzialna za uruchomienie kiosku oraz zapewnienie ciągłości działania stanowiska.
+
+### Cele administratora:
+- uruchomić kiosk i aplikację,
+- zapewnić stabilne działanie stanowiska,
+- ograniczyć potrzebę ręcznej obsługi,
+- w razie potrzeby zresetować urządzenie lub wyczyścić lokalną tabelę wyników.
 
 ---
 
-### UC-04: Widok 360 wnętrza pojazdu
-Aktor: Zwiedzający  
-Cel: rozejrzeć się we wnętrzu Peel P50 w trybie 360.  
-Warunek wstępny: uruchomiono moduł widoku 360.  
-Scenariusz główny:
-1. Zwiedzający wykonuje gest przesunięcia (drag), aby obracać widok.
-2. Aplikacja płynnie aktualizuje kierunek patrzenia.
-3. Zwiedzający używa przycisku “Wstecz”, aby wrócić do menu.
-Rezultat: użytkownik obejrzał wnętrze w 360 i wraca do menu.
+# 2. Założenia systemu
+
+- aplikacja działa offline,
+- brak backendu i API,
+- brak logowania użytkowników,
+- brak przetwarzania danych osobowych,
+- wyniki TOP 5 zapisywane są lokalnie przy użyciu PlayerPrefs,
+- aplikacja działa na kiosku dotykowym,
+- system automatycznie wraca do menu głównego po czasie bezczynności,
+- aplikacja działa w trybie kioskowym,
+- użytkownik nie może opuścić aplikacji i przejść do systemu Android.
 
 ---
 
-### UC-05: Uruchomienie wirtualnego zwiedzania (WebView) – jeśli moduł występuje w buildzie
-Aktor: Zwiedzający  
-Cel: uruchomić stronę/treść 360 w osadzonym WebView.  
-Warunek wstępny: aplikacja posiada w menu opcję “Wirtualne zwiedzanie”.  
-Scenariusz główny:
-1. Zwiedzający wybiera opcję “Wirtualne zwiedzanie”.
-2. Aplikacja ukrywa menu i otwiera WebView z adresem URL.
-3. Zwiedzający porusza się po treści w WebView.
-4. Zwiedzający używa “Wstecz”, aby wrócić do menu (lub cofa w historii).
-Rezultat: treść www została wyświetlona, użytkownik wraca do menu.
-
-Uwaga: jeżeli w finalnej wersji ten moduł jest wyłączony/nieużywany, UC-05 oznaczyć jako “nie dotyczy” w kontekście finalnego wdrożenia.
+# 3. Przypadki użycia
 
 ---
 
-### UC-06: Jazda testowa / tryb symulacyjny
-Aktor: Zwiedzający  
-Cel: uruchomić prostą jazdę testową i sterować pojazdem.  
-Warunek wstępny: uruchomiono moduł jazdy testowej.  
-Scenariusz główny:
-1. Aplikacja wykonuje odliczanie startowe.
-2. Zwiedzający steruje pojazdem (przyciski ekranowe / wejście).
-3. Aplikacja zlicza czas przejazdu (start/meta) i prezentuje wynik.
-4. Zwiedzający może rozpocząć ponownie lub wrócić do menu.
-Rezultat: wykonano przejazd i wyświetlono wynik / rekordy.
+# UC-01 — Uruchomienie aplikacji i menu główne
+
+## Aktor
+Zwiedzający
+
+## Cel
+Rozpoczęcie korzystania z aplikacji.
+
+## Warunek wstępny
+Aplikacja jest uruchomiona na kiosku.
+
+## Scenariusz główny
+1. Zwiedzający podchodzi do kiosku.
+2. Aplikacja wyświetla menu główne.
+3. Użytkownik wybiera jeden z dostępnych modułów:
+   - widok 360,
+   - dźwięki pojazdu,
+   - jazda testowa.
+
+## Rezultat
+System przechodzi do wybranego modułu.
 
 ---
 
-### UC-07: Automatyczny powrót do menu po bezczynności (Idle Return)
-Aktor: Zwiedzający (pośrednio), Administrator (pośrednio)  
-Cel: przywrócić aplikację do stanu gotowości, gdy użytkownik odejdzie.  
-Warunek wstępny: aplikacja jest uruchomiona w dowolnym module/scenie.  
-Scenariusz główny:
-1. Użytkownik nie wykonuje żadnych akcji przez określony czas.
-2. Aplikacja automatycznie przełącza się do menu (scena główna).
-Rezultat: kiosk wraca do stanu “dla następnego zwiedzającego”.
+# UC-02 — Nawigacja po menu
 
-## 4. Kryteria akceptacji (skrót)
+## Aktor
+Zwiedzający
 
-- Menu musi być czytelne na ekranie kiosku i umożliwiać wejście do modułów.
-- Moduły muszą mieć możliwość powrotu do menu.
-- Aplikacja powinna być odporna na “pozostawienie” bez obsługi (auto return).
-- Brak elementów wymagających sieci/back-endu do podstawowego działania (poza opcjonalnym WebView).
+## Cel
+Wybranie funkcji aplikacji.
+
+## Warunek wstępny
+Menu główne jest aktywne.
+
+## Scenariusz główny
+1. Użytkownik wybiera przycisk modułu.
+2. System ładuje odpowiednią scenę.
+3. Użytkownik rozpoczyna interakcję.
+
+## Rezultat
+Wybrany moduł zostaje uruchomiony.
+
+---
+
+# UC-03 — Widok wnętrza 360
+
+## Aktor
+Zwiedzający
+
+## Cel
+Obejrzenie wnętrza Peel P50 w trybie panoramicznym.
+
+## Warunek wstępny
+Użytkownik wybrał moduł widoku 360.
+
+## Scenariusz główny
+1. System uruchamia widok 360 wnętrza pojazdu.
+2. Użytkownik przesuwa palcem po ekranie.
+3. Kamera obraca się zgodnie z ruchem użytkownika.
+4. Zwiedzający ogląda wnętrze pojazdu.
+5. Użytkownik wybiera przycisk powrotu.
+6. System wraca do menu głównego.
+
+## Rezultat
+Użytkownik kończy przeglądanie wnętrza pojazdu.
+
+## Scenariusz alternatywny
+Jeżeli użytkownik pozostaje nieaktywny przez określony czas, aplikacja automatycznie wraca do menu głównego.
+
+---
+
+# UC-04 — Odtwarzanie dźwięków pojazdu
+
+## Aktor
+Zwiedzający
+
+## Cel
+Odtworzenie dźwięków związanych z pojazdem.
+
+## Warunek wstępny
+Użytkownik wybrał moduł dźwięków.
+
+## Scenariusz główny
+1. System wyświetla panel dźwięków.
+2. Użytkownik wybiera jeden z dostępnych efektów:
+   - uruchomienie silnika,
+   - praca silnika,
+   - klakson,
+   - drzwi.
+3. System odtwarza wybrany dźwięk.
+4. Użytkownik może odtworzyć kolejny dźwięk lub wrócić do menu.
+
+## Rezultat
+Wybrany efekt audio zostaje odtworzony.
+
+---
+
+# UC-05 — Jazda testowa
+
+## Aktor
+Zwiedzający
+
+## Cel
+Uruchomienie uproszczonej symulacji jazdy.
+
+## Warunek wstępny
+Użytkownik wybrał moduł jazdy testowej.
+
+## Scenariusz główny
+1. System ładuje scenę jazdy testowej.
+2. Pojazd zostaje ustawiony na pozycji startowej.
+3. System wyświetla odliczanie.
+4. Po zakończeniu odliczania rozpoczyna się jazda.
+5. Użytkownik steruje pojazdem przy użyciu ekranowych przycisków.
+6. Kamera podąża za pojazdem.
+7. System wyświetla HUD:
+   - prędkościomierz,
+   - wskaźniki jazdy.
+
+## Rezultat
+Użytkownik może przejechać trasę testową.
+
+## Scenariusz alternatywny
+W przypadku bezczynności aplikacja automatycznie wraca do menu głównego.
+
+---
+
+# UC-06 — Pomiar czasu przejazdu
+
+## Aktor
+Zwiedzający
+
+## Cel
+Uzyskanie czasu przejazdu.
+
+## Warunek wstępny
+Aktywna jazda testowa.
+
+## Scenariusz główny
+1. Pojazd przekracza linię startu.
+2. System rozpoczyna pomiar czasu.
+3. Użytkownik przejeżdża trasę.
+4. Pojazd przekracza linię mety.
+5. System zatrzymuje pomiar czasu.
+6. Wynik zostaje wyświetlony.
+
+## Rezultat
+System prezentuje czas przejazdu.
+
+---
+
+# UC-07 — Ranking TOP 5
+
+## Aktor
+Zwiedzający
+
+## Cel
+Wyświetlenie najlepszych wyników.
+
+## Warunek wstępny
+Użytkownik ukończył przejazd.
+
+## Scenariusz główny
+1. System porównuje wynik użytkownika z lokalną tabelą rekordów.
+2. Jeżeli wynik znajduje się w TOP 5:
+   - system zapisuje rekord,
+   - aktualizuje ranking.
+3. System wyświetla tabelę najlepszych wyników.
+
+## Rezultat
+Ranking zostaje zaktualizowany.
+
+## Scenariusz alternatywny
+Jeżeli wynik nie znajduje się w TOP 5, tabela pozostaje bez zmian.
+
+---
+
+# UC-08 — Ponowne uruchomienie przejazdu
+
+## Aktor
+Zwiedzający
+
+## Cel
+Rozpoczęcie kolejnego przejazdu.
+
+## Warunek wstępny
+Poprzedni przejazd został zakończony.
+
+## Scenariusz główny
+1. Użytkownik wybiera opcję restartu.
+2. System resetuje pozycję pojazdu.
+3. System zeruje czas przejazdu.
+4. Rozpoczyna się nowe odliczanie.
+5. Użytkownik rozpoczyna kolejny przejazd.
+
+## Rezultat
+Nowa jazda testowa zostaje uruchomiona.
+
+---
+
+# UC-09 — Czyszczenie tabeli rekordów
+
+## Aktor
+Administrator / opiekun ekspozycji
+
+## Cel
+Usunięcie zapisanych wyników TOP 5.
+
+## Warunek wstępny
+Tabela wyników jest dostępna.
+
+## Scenariusz główny
+1. Administrator wybiera opcję wyczyszczenia rekordów.
+2. System usuwa zapisane dane lokalne.
+3. Ranking zostaje wyzerowany.
+
+## Rezultat
+Tabela rekordów zostaje wyczyszczona.
+
+---
+
+# UC-10 — Automatyczny reset po bezczynności
+
+## Aktor
+Zwiedzający
+
+## Cel
+Przywrócenie aplikacji do stanu gotowości.
+
+## Warunek wstępny
+Aplikacja działa w dowolnym module.
+
+## Scenariusz główny
+1. Użytkownik przestaje korzystać z aplikacji.
+2. System monitoruje czas bezczynności.
+3. Po przekroczeniu limitu czasu system automatycznie wraca do menu głównego.
+
+## Rezultat
+Aplikacja jest gotowa dla kolejnego użytkownika.
+
+---
+
+# UC-11 — Obsługa kiosku
+
+## Aktor
+Administrator / opiekun ekspozycji
+
+## Cel
+Zapewnienie poprawnego działania stanowiska.
+
+## Warunek wstępny
+Kiosk znajduje się na ekspozycji muzealnej.
+
+## Scenariusz główny
+1. Administrator uruchamia kiosk.
+2. Android uruchamia aplikację w trybie kioskowym.
+3. System automatycznie wyświetla menu główne.
+4. Administrator sprawdza działanie ekranu dotykowego.
+5. W razie problemu wykonuje restart urządzenia.
+
+## Rezultat
+Stanowisko działa poprawnie i jest gotowe dla zwiedzających.
+
+---
+
+# 4. Kryteria akceptacji
+
+- aplikacja uruchamia się poprawnie na kiosku,
+- menu główne jest dostępne po uruchomieniu,
+- użytkownik może przejść do wszystkich modułów,
+- widok 360 działa poprawnie,
+- dźwięki pojazdu odtwarzają się prawidłowo,
+- jazda testowa uruchamia się poprawnie,
+- system mierzy czas przejazdu,
+- ranking TOP 5 zapisuje wyniki lokalnie,
+- użytkownik może ponownie uruchomić przejazd,
+- aplikacja automatycznie wraca do menu po bezczynności,
+- system działa bez Internetu,
+- aplikacja nie wymaga logowania,
+- interfejs jest dostosowany do obsługi dotykowej,
+- użytkownik nie może opuścić aplikacji i przejść do systemu Android.
