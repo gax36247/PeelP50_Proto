@@ -68,17 +68,7 @@ Możliwe ścieżki procesu:
 
 # Ścieżki procesu
 
-## 4.1 Prezentacja pojazdu
-
-### Zadanie systemowe
-System uruchamia prezentację pojazdu.
-
-### Aktywność użytkownika
-Zwiedzający wykonuje interakcję dotykową z prezentacją.
-
----
-
-## 4.2 Widok 360 wnętrza
+## 4.1 Widok 360 wnętrza
 
 ### Zadanie systemowe
 System uruchamia widok 360 wnętrza pojazdu.
@@ -88,7 +78,7 @@ Zwiedzający eksploruje widok wnętrza pojazdu.
 
 ---
 
-## 4.3 Jazda testowa
+## 4.2 Jazda testowa
 
 ### Zadanie systemowe
 System uruchamia tryb jazdy testowej.
@@ -98,7 +88,7 @@ Zwiedzający steruje pojazdem.
 
 ---
 
-## 4.4 Menu dźwięków pojazdów
+## 4.3 Menu dźwięków pojazdów
 
 ### Zadanie systemowe
 System uruchamia menu dźwięków pojazdów.
@@ -194,15 +184,13 @@ Zdarzenie początkowe:
    → System przechodzi do menu głównego
 
 2. Zwiedzający wybiera tryb działania  
-   (prezentacja 3D / widok 360 / jazda testowa)
+   (widok 360 / jazda testowa)
 
 3. System uruchamia wybrany moduł:
-   - prezentacja pojazdu
    - widok 360 wnętrza
    - tryb jazdy testowej
 
 4. Zwiedzający korzysta z wybranego modułu:
-   - interakcja dotykowa
    - sterowanie pojazdem
    - eksploracja widoku
 
